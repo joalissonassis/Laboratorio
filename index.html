@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arquivos — Atividades</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --radius: 14px;
+      --maxw: 900px;
+    }
+
+    *{box-sizing: border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, var(--bg), #eef2f8 60%);
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
+
+    .sheet{
+      width:100%;
+      max-width:var(--maxw);
+      background:var(--card);
+      border-radius:18px;
+      box-shadow: 0 8px 30px rgba(15,23,42,0.08);
+      padding:28px;
+      text-align:center;
+    }
+
+    header{
+      margin-bottom:18px;
+    }
+    .title{
+      font-size:20px;
+      font-weight:700;
+      margin:6px 0 4px;
+    }
+    .subtitle{
+      font-size:13px;
+      color:var(--muted);
+      margin:0;
+    }
+
+    main{
+      margin-top:14px;
+      text-align:left;
+    }
+
+    .intro{
+      background: linear-gradient(180deg, rgba(37,99,235,0.06), rgb(216, 0, 0));
+      border-radius:12px;
+      padding:14px 16px;
+      margin-bottom:20px;
+      color: #0f172a;
+      line-height:1.45;
+      font-size:15px;
+    }
+
+    section.lab{
+      margin-bottom:22px;
+      padding:16px;
+      border-radius:12px;
+      border: 1px solid rgba(15,23,42,0.04);
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(250,250,252,0.6));
+    }
+
+    .lab-head{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .lab-title{
+      display:flex;
+      flex-direction:column;
+      text-align:left;
+    }
+    .lab-title h3{
+      margin:0;
+      font-size:16px;
+      font-weight:600;
+    }
+    .lab-title p{
+      margin:4px 0 0;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* grid de imagens */
+    .grid{
+      display:grid;
+      gap:12px;
+    }
+
+    .grid.grid-4{
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    .grid.grid-2{
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    figure{
+      margin:0;
+      background:linear-gradient(180deg, #ffffff, #fbfdff);
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      cursor: zoom-in;
+    }
+
+    figure img{
+      width:100%;
+      height:150px;
+      object-fit:cover;
+      display:block;
+      border-bottom:1px solid rgba(15,23,42,0.04);
+    }
+
+    figure figcaption{
+      padding:10px;
+      font-size:13px;
+      color:var(--muted);
+      text-align:left;
+    }
+
+    @media (min-width:900px){
+      .sheet{padding:36px}
+      figure img{height:140px}
+    }
+
+    footer{
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .badge{
+      background: rgba(37,99,235,0.08);
+      color:var(--accent);
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:12px;
+      display:inline-block;
+    }
+
+    .meta{
+      text-align:right;
+    }
+
+    /* Modal Zoom */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      padding-top: 40px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.85);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+
+    .modal-content:hover {
+      transform: scale(1.02);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 30px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 700px) {
+      .modal-content {
+        max-width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet" role="main" aria-labelledby="page-title">
+    <header>
+      <div class="title" id="page-title">Arquivos — Atividade Pendentes</div>
+      <div class="subtitle">imagens obrigatórias</div>
+    </header>
+
+    <main>
+      <p class="intro">
+        Professora, tive um problema com o pagamento do armazenamento do Google, o que impossibilitou o envio dos arquivos da aula por lá.
+        Como alternativa, disponibilizei os arquivos no GitHub e anexei as imagens aqui para a entrega.
+      </p>
+
+      <!-- Seção 1 -->
+      <section class="lab" aria-labelledby="lab-1">
+        <div class="lab-head">
+          <div class="lab-title">
+            <h3 id="lab-1">Laboratório — Amazon S3: Básico, Avançado e Acesso a Logs</h3>
+            <p>Descrição: Atividade prática sobre criação de buckets, políticas, controle de versões e análise de logs do S3.</p>
+          </div>
+          <div class="badge" aria-hidden="true">4 imagens</div>
+        </div>
+
+        <div class="grid grid-4" role="list">
+          <figure role="listitem">
+            <img src="Laboratório - Amazon S3 Básico, Avançado e Acesso a Logs/PRINT1-4.png" alt="S3 - criação de bucket (exemplo)" />
+            <figcaption>Print do  registro em log de acesso ao servidor ativado </figcaption>
+          </figure>
+
+          <figure role="listitem">
+            <img src="Laboratório - Amazon S3 Básico, Avançado e Acesso a Logs/PRINT1-CICLO.png" alt="S3 - políticas e permissões" />
+            <figcaption>Print do  regras do ciclo de vida criada   - 25 pontos</figcaption>
+          </figure>
+
+          <figure role="listitem">
+            <img src="Laboratório - Amazon S3 Básico, Avançado e Acesso a Logs/PRINT1-S3.png" alt="S3 - controle de versão" />
+            <figcaption>Print dos buckets criados </figcaption>
+          </figure>
+
+          <figure role="listitem">
+            <img src="Laboratório - Amazon S3 Básico, Avançado e Acesso a Logs/PRINT1-VERSIONAMENTO.png" alt="S3 - acesso a logs e análise" />
+            <figcaption>Print do  versionamento ativado </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Seção 2 -->
+      <section class="lab" aria-labelledby="lab-2">
+        <div class="lab-head">
+          <div class="lab-title">
+            <h3 id="lab-2">Laboratório — SSM Parameter Store Hands-on (CLI)</h3>
+            <p>Descrição: Uso do AWS CLI para criação, leitura e versionamento de parâmetros seguros e não seguros.</p>
+          </div>
+          <div class="badge" aria-hidden="true">2 imagens</div>
+        </div>
+
+        <div class="grid grid-2" role="list">
+          <figure role="listitem">
+            <img src="Laboratório – SSM Parameter Store Hands on (CLI )/print-kms.png" alt="SSM CLI - criar parâmetro" />
+            <figcaption>Print da chave criada no KMS  </figcaption>
+          </figure>
+
+          <figure role="listitem">
+            <img src="Laboratório – SSM Parameter Store Hands on (CLI )/print-parameter.png" alt="SSM CLI - leitura e versão" />
+            <figcaption>Print dos parâmetros criados no Parameter Store</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>Observação: Apenas para fins educativos</div>
+      <div class="meta">
+        <div>Enviado em: <strong>10 de agosto de 2025</strong></div>
+        <div style="font-size:12px; color:var(--muted)">https://classroom.google.com/c/Nzg2NzY3NDA2MDMz/a/Nzg2NzY3NDA2MDc4/details</div>
+        <div style="font-size:12px; color:var(--muted)">https://classroom.google.com/c/Nzg2NzY3NDA2MDMz/a/Nzg2NzY3NDA2MDgy/details</div>
+      </div>
+    </footer>
+  </div>
+
+
+  <div id="imgModal" class="modal">
+    <span class="modal-close" id="closeModal">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+    const images = document.querySelectorAll('.grid img');
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'block';
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+      });
+    });
+
+    closeModal.onclick = () => {
+      modal.style.display = 'none';
+    };
+
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>
